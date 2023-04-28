@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;800&display=swap');
+
+body {
+  position:  relative !important;
+  background: #000;
+}
+
+/* adust your token text, button background and token button text color  */
+.token-text {
+  color:#13B5EC;
+}
+
+.token-btn-bg {
+  background: linear-gradient(90deg, #13B5EC 0%, #0B6786 104.67%);
+}
+
+.token-btn-color {
+  color: #fff;
+}
+
+/* adust your bg image url, height and width position for home header and approval page */
+.header-bg {
+  background-image: url('/images/celo-logo.svg');
+  background-repeat: no-repeat;
+  height: 460px;
+  width: 460px;
+
+  /* default for all */
+  background-size: contain;
+  position: relative;
+}
+
+/* adust your bg icon position for approval page*/
+.approval-bg-position {
+  bottom: 35px;
+  right: 10px;
+}
+
+/* adust your bg icon for home header bg */
+.header-bg-position {
+  top: 13px;
+  right: -12px;
+}
+
+.border_on_drag {
+  border: 5px dashed #fff;
+  border-radius: 12px;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
