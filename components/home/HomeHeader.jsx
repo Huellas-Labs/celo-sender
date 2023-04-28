@@ -17,7 +17,7 @@ const {name, tokenSymbol, inputTokenText, styles: uiStyle} = uiMetaData;
 
 const HomeHeader = (props) => {
     const router = useRouter();
-    const fileInput = useRef();
+    let fileInput = useRef();
     const textareaNum = useRef(null);
     const [csvState, setCsvState] = useState({
         isPageOneBtnDisabled: true,
