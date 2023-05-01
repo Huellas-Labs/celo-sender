@@ -12,9 +12,7 @@ const Referral = () => {
         <p className="text-sm py-1">
           Earn {title} by referring people to {siteName}
         </p>
-
-        <h1 className="text-fb font-extrabold text-4xl" data-aos="zoom-in">{name} Referral System Coming Soon</h1>
-        {/* <p className="text-sm py-1">
+        <p className="text-sm py-1">
           Insert the {title} address you would like to receive your {title}
           tokens, and generate your unique referral address.
         </p>
@@ -31,7 +29,7 @@ const Referral = () => {
           type="text"
           placeholder={`Input ${title} address`}
           className="bg-black text-white px-4 py-3 rounded-md my-2 md:w-[300px] placeholder-fb"
-        /> */}
+        /> 
       </div>
     </div>
   );
