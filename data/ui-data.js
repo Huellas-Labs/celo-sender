@@ -1,5 +1,5 @@
 export const uiData = {
-    name: "CELOSENDER",
+    name: "CELO Sender",
     title: "CELO",
     tokenSymbol: "CELO",
     siteName: "CELOsender.com",
