@@ -18,12 +18,11 @@
   content: "";
   position: absolute;
   background: linear-gradient(45deg,
-      #f585f3,
-      #fa6db3,
-      #E1177C,
-      #97406c,
-      #ff0080,
-      #f585f3
+    #FCFF52,
+    #ffff66,
+    #ffff00,
+    #cc9900,
+    #FCFF52
   );
   background-size: 400%;
   border-radius: 10px;
