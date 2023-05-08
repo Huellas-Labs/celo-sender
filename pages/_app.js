@@ -15,7 +15,7 @@ import Web3 from 'web3';
 import { CHAINID, RPC, CHAINID_HEX } from '../config/abi-config';
 import { uiMetaData } from "../data";
 
-const {wallet, tokenSymbol} = uiMetaData;
+const {wallet, tokenSymbol, title} = uiMetaData;
 
 const injected = injectedModule();
 const walletConnect = walletConnectModule();
@@ -28,7 +28,7 @@ const onboard = Onboard({
       id: CHAINID_HEX, // chain ID must be in hexadecimel
       token: tokenSymbol, // main chain token
       namespace: "evm",
-      label: "Moonbeam",
+      label: "Celo",
       rpcUrl: RPC,
     }
   ],
@@ -82,14 +82,22 @@ function MyApp({ Component, pageProps }) {
   const switchNetworkToMainnet = async (provider, chainId) => {
     if (provider) {
       try {
-        provider.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: CHAINID_HEX}],
-        }).then((res) => {
-          connectWallet();
-        }).catch((err) => {
-  
-        });
+        await provider.request({ method: "eth_requestAccounts"});
+            await provider.request({
+                method: "wallet_addEthereumChain",
+                params: [
+                    {
+                        chainId: CHAINID_HEX,
+                        chainName: title,
+                        nativeCurrency: {
+                            name: title,
+                            symbol: tokenSymbol,
+                            decimals: 18
+                        },
+                    rpcUrls: [RPC],
+                    },
+                ]
+            })
       } catch (error) {
         if (error.code === 4902) {
           try {

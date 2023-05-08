@@ -663,7 +663,7 @@ const HomeHeader = (props) => {
                         <div className="bg-black p-4 rounded-md mt-4 h-52 flex flex-col items-center justify-center relative">
                             {!csvState.isViewChange ? <div className="w-full h-full flex flex-col items-center justify-center relative">
                                 <p className="text-lg font-medium">Drag {"&"} drop the CSV</p>
-                                <p className="text-sm">.. or click to select a file from your computer</p>
+                                <p className="text-sm text-center">.. or click to select a file from your computer</p>
                                 <input
                                     type="file"
                                     className="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
