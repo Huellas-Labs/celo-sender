@@ -82,14 +82,22 @@ function MyApp({ Component, pageProps }) {
   const switchNetworkToMainnet = async (provider, chainId) => {
     if (provider) {
       try {
-        provider.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: CHAINID_HEX}],
-        }).then((res) => {
-          connectWallet();
-        }).catch((err) => {
-  
-        });
+        await provider.request({ method: "eth_requestAccounts" });
+        await provider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: CHAINID_HEX,
+              chainName: 'Celo Mainnet',
+              nativeCurrency: {
+                name: 'Celo Mainnet',
+                symbol: tokenSymbol,
+                decimals: 18
+              },
+              rpcUrls: [RPC],
+            },
+          ]
+        })
       } catch (error) {
         if (error.code === 4902) {
           try {
