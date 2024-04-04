@@ -488,7 +488,7 @@ const HomeHeader = (props) => {
         if (!props.connectionDetails.account) return;
         if (CHAINID.indexOf(Number(props.connectionDetails.chainId)) == -1) return;
 
-        let rootPath = 'https://api.covalenthq.com/v1/' + Number(props.connectionDetails.chainId) + '/address/' + props.connectionDetails.account + '/balances_v2/?key=ckey_a4cbc468c97e4ea89569a8ca90c';
+        let rootPath = 'https://api.covalenthq.com/v1/' + Number(props.connectionDetails.chainId) + '/address/' + props.connectionDetails.account + '/balances_v2/?key=' + process.env.NEXT_PUBLIC_COVALENTHQ_API_KEY;
 
         console.log(`Using ${rootPath}`);
         const { data } = await axios.get(`${rootPath}`, {

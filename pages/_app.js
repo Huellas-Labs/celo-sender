@@ -15,7 +15,7 @@ import Web3 from 'web3';
 import { CHAINID, RPC, CHAINID_HEX } from '../config/abi-config';
 import { uiMetaData } from "../data";
 
-const {wallet, tokenSymbol} = uiMetaData;
+const { wallet, tokenSymbol } = uiMetaData;
 
 const injected = injectedModule();
 const walletConnect = walletConnectModule();
@@ -61,18 +61,18 @@ function MyApp({ Component, pageProps }) {
 
   const connectWallet = async () => {
     try {
-      const wallets = await onboard.connectWallet();
       setIsLoading(true);
+      const wallets = await onboard.connectWallet();
       const { accounts, chains, provider } = wallets[0];
+      let web3 = new Web3(provider);
+      setWeb3(web3);
+      setAccount(accounts[0].address);
+      setProvider(provider);
       if (CHAINID.indexOf(Number(chains[0].id)) == -1) {
         switchNetworkToMainnet(provider, CHAINID[0]);
         return;
       }
-      let web3 = new Web3(provider);
-      setWeb3(web3);
-      setAccount(accounts[0].address);
       setChainId(chains[0].id);
-      setProvider(provider);
       setIsLoading(false);
     } catch (error) {
       setError(error);
@@ -81,6 +81,7 @@ function MyApp({ Component, pageProps }) {
 
   const switchNetworkToMainnet = async (provider, chainId) => {
     if (provider) {
+      setChainId(chainId);
       try {
         await provider.request({ method: "eth_requestAccounts" });
         await provider.request({
