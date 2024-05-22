@@ -16,7 +16,7 @@ const Referral = () => {
       const refLink = `${process.env.NEXT_PUBLIC_LIVE_URL}${value.toLowerCase()}`;
       setReferalLink(refLink);
     } else {
-      setErrorMsg('Please enter a valid wallet ID');
+      setErrorMsg('Please enter a valid wallet Address');
     }
   };
   return (
