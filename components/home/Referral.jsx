@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { uiMetaData } from "../../data";
 import { useState } from "react";
+import Web3 from "web3";
 
 const { name, siteName, title } = uiMetaData;
 
@@ -9,15 +10,15 @@ const Referral = () => {
   const [referalLink, setReferalLink] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const generateReff = () => {
-    if (value) {
+  const generateRef = () => {
+    if (Web3.utils.isAddress(value)) {
       setErrorMsg('');
-      const refLink = `${process.env.NEXT_PUBLIC_LIVE_URL}${value.toLowerCase()}`
-      setReferalLink(refLink)
+      const refLink = `${process.env.NEXT_PUBLIC_LIVE_URL}${value.toLowerCase()}`;
+      setReferalLink(refLink);
     } else {
-      return setErrorMsg('Past your wallet id first')
+      setErrorMsg('Please enter a valid wallet ID');
     }
-  }
+  };
   return (
     <div className="bg-[#1A1A1A]">
       <div className="max-w-4xl m-auto px-3 py-6 md:pl-0" data-aos="fade-up">
@@ -37,7 +38,7 @@ const Referral = () => {
           your unique referral link.
         </p>
 
-        {!referalLink ? <><button className="bg-fb text-black px-4 py-2 rounded-md font-semibold my-3" onClick={() => generateReff()}>
+        {!referalLink ? <><button className="bg-fb text-black px-4 py-2 rounded-md font-semibold my-3" onClick={() => generateRef()}>
           Generate referral link
         </button>
           <br />
