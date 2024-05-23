@@ -2,6 +2,7 @@ import Image from "next/image";
 import { uiMetaData } from "../../data";
 import { useState } from "react";
 import Web3 from "web3";
+import Link from "next/link";
 
 const { name, siteName, title } = uiMetaData;
 
@@ -13,7 +14,7 @@ const Referral = () => {
   const generateRef = () => {
     if (Web3.utils.isAddress(value)) {
       setErrorMsg('');
-      const refLink = `${process.env.NEXT_PUBLIC_LIVE_URL}${value.toLowerCase()}`;
+      const refLink = `${value.toLowerCase()}`;
       setReferalLink(refLink);
     } else {
       setErrorMsg('Please enter a valid wallet Address');
@@ -50,9 +51,9 @@ const Referral = () => {
           />
           {errorMsg && <p className="text-red-700 font-bold mt-2 ml-1">{errorMsg}</p>}
         </> : <div>
-          <button className="bg-fb text-black font-semibold rounded-md py-2 px-4 my-3 flex gap-2 items-center" data-aos="fade-up" onClick={() => window.open(referalLink, '_blank')}>
+        <Link href={referalLink}><button className="bg-fb text-black font-semibold rounded-md py-2 px-4 my-3 flex gap-2 items-center" data-aos="fade-up">
             Share referral link <Image src="/images/send.png" alt="" width={18} height={18} />
-          </button>
+          </button></Link>
         </div>}
       </div>
     </div>
