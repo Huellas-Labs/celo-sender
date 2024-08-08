@@ -13,7 +13,7 @@ const styles = {
     btnGradient: "bg-gradient-to-r from-indigo-500 via-purple-500 to-yellow-500"
 }
 
-const {name, tokenSymbol, inputTokenText, styles: uiStyle} = uiMetaData;
+const { name, tokenSymbol, inputTokenText, styles: uiStyle } = uiMetaData;
 
 const HomeHeader = (props) => {
     const router = useRouter();
@@ -34,6 +34,7 @@ const HomeHeader = (props) => {
     const [tokenList, setTokenList] = useState(null);
     const [selectedTokenDetail, setSelectedTokenDetail] = useState(null);
     const [selectedTokenId, setSelectedTokenId] = useState(null);
+    const [setIsPageOneBtnDisabled] = useState();
 
     useEffect(() => {
         if (props.pastData) {
@@ -535,7 +536,10 @@ const HomeHeader = (props) => {
         // console.log(e.target.value)
         if (e.target.value == -1) {
             toastr.error("Please select valid token.")
-            setIsPageOneBtnDisabled(true);
+            setCsvState(prevState => ({
+                ...prevState,
+                isPageOneBtnDisabled: true
+            }))
             return;
         }
         if (!isValidConnection()) {
@@ -595,6 +599,9 @@ const HomeHeader = (props) => {
         if (csvState.isPageOneBtnDisabled) {
             return;
         }
+        if (!selectedTokenDetail, !selectedTokenId) {
+            return toastr.error("Select your token first")
+        }
         if (selectedTokenDetail && selectedTokenId && csvState.csvArray && csvState.csvArray.length > 0) {
             props.setPastData({
                 'csvState': csvState,
@@ -603,7 +610,6 @@ const HomeHeader = (props) => {
             })
             router.push('/approval')
         } else {
-            //console.log("No uploaded data found.");
             toastr.error("Something went wrong.")
         }
     }
@@ -613,7 +619,7 @@ const HomeHeader = (props) => {
         ta.forEach((e) => {
             e.style.display = "none";
         });
-        
+
         const ta2 = document.querySelectorAll(".my-num-line");
         ta2.forEach((e) => {
             e.style.display = "none";
@@ -692,20 +698,20 @@ const HomeHeader = (props) => {
                                 className="bg-fb text-black px-8 py-2 rounded-md font-semibold my-3 text-sm md:text-base"
                                 onClick={() => { $('#file_upload').trigger('click') }}>
                                 Upload CSV
-                        </button>
+                            </button>
 
                             <p>
                                 Download Sample &nbsp;
-                            <button className="text-fb underline" onClick={() => { downloadSample('csv') }} >CSV</button>
-                            &nbsp;/&nbsp;
-                            <button className="text-fb underline" onClick={() => { downloadSample('txt') }} >TXT</button>
+                                <button className="text-fb underline" onClick={() => { downloadSample('csv') }} >CSV</button>
+                                &nbsp;/&nbsp;
+                                <button className="text-fb underline" onClick={() => { downloadSample('txt') }} >TXT</button>
                             </p>
                         </div>
 
                         {(csvState.invalidRows && csvState.invalidRows.length > 0) ? <div className="px-3 py-4 bg-red-200 rounded">
                             <div className="text-red-600 text-sm font-semibold">
                                 The following rows will not be part of the {name} as they are invalid:
-                        </div>
+                            </div>
 
                             <table className="my-3 w-full text-gray-900 border-collapse">
                                 <thead>
@@ -746,7 +752,7 @@ const HomeHeader = (props) => {
                             {csvState.isPageOneBtnDisabled ?
                                 (<button className={uiStyle.approveBtn} style={{ cursor: 'not-allowed' }} disabled={csvState.isPageOneBtnDisabled}>Approve & Send</button>)
                                 :
-                                (<button className={uiStyle.approveBtn} style={{ cursor: csvState.isPageOneBtnDisabled ? 'not-allowed' : 'pointer' , background: 'green'}} disabled={csvState.isPageOneBtnDisabled} onClick={() => pageOneNextClick()} >Approve & Send</button>)
+                                (<button className={uiStyle.approveBtn} style={{ cursor: csvState.isPageOneBtnDisabled ? 'not-allowed' : 'pointer', background: 'green', color: 'white' }} disabled={csvState.isPageOneBtnDisabled} onClick={() => pageOneNextClick()} >Approve & Send</button>)
                             }
                         </div>
                     </div>

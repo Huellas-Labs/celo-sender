@@ -12,6 +12,6 @@ export const uiData = {
     },
     styles: {
         uploadBtn: "bg-fb text-black px-8 py-2 rounded-md font-semibold my-3 text-sm md:text-base",
-        approveBtn: "bg-fb text-black py-2 px-3 rounded-md font-semibold my-3 text-sm md:text-base"
+        approveBtn: "bg-fb disabled:grayscale text-black py-2 px-3 rounded-md font-semibold my-3 text-sm md:text-base"
     }
 };

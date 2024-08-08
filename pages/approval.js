@@ -269,11 +269,11 @@ const Approval = (props) => {
 
   const getErrorMessage = () => {
     if (!(Number(props.pastData.selectedTokenDetail.walletBalance) > 0)) {
-      return '* Insufficient FTM balance';
+      return '* Insufficient CELO balance';
     } else if (Number(props.pastData.csvState.uploadTotal) > Number(props.pastData.selectedTokenDetail.tokenBalance)) {
       return '* Insufficient token balance';
     } else if (Number(props.pastData.selectedTokenDetail.walletBalance) < (Number(CHARGE_VALUE) + Number(0.001))) {
-      return '* Insufficient FTM balance for fee';
+      return '* Insufficient CELO balance for fee';
     }
   }
 
@@ -343,7 +343,7 @@ const Approval = (props) => {
               <p className="text-lg token-text">{(props.pastData.selectedTokenDetail.tokenBalance >= props.pastData.csvState.uploadTotal) ? '' : '* Insufficient token balance'}</p>
               <div className="mb-">
                 <button onClick={() => { router.push('/') }} className="token-btn-bg text-lg token-btn-color  px-16 py-2 rounded-lg font-semibold my-3 md:text-base">Back</button>
-                <button disabled={isPageTwoBtnDisabled} onClick={() => pageTwoNextClick()} className="token-btn-bg text-lg token-btn-color ml-2 px-16 py-2 rounded-lg font-semibold my-3 md:text-base">Next</button>
+                <button disabled={isPageTwoBtnDisabled} onClick={() => pageTwoNextClick()} className="token-btn-bg text-lg token-btn-color ml-2 px-16 py-2 rounded-lg font-semibold my-3 md:text-base disabled:grayscale">Next</button>
               </div>
             </>}
 
@@ -373,14 +373,14 @@ const Approval = (props) => {
                   <p className="text-xs">Your {tokenData.tokenNameShort} balance</p>
                 </div>
                 <div className="bg-black p-4 rounded-lg shadow text-center">
-                  <p className="text-2xl token-text font-semibold my-1">{props?.pastData?.csvState?.batchLen * CHARGE_VALUE} FTM + network fees</p>
+                  <p className="text-2xl token-text font-semibold my-1">{props?.pastData?.csvState?.batchLen * CHARGE_VALUE} CELO + network fees</p>
                   <p className="text-xs">Cost of operation</p>
                 </div>
               </div>
               <p className="text-lg token-text">{getErrorMessage()}</p>
               <div className="mb-">
                 <button className="token-btn-bg text-lg token-btn-color px-16 py-2 rounded-lg font-semibold my-3 md:text-base" onClick={() => setStep(2)}>Back</button>
-                <button className="token-btn-bg text-lg token-btn-color ml-2 px-16 py-2 rounded-lg font-semibold my-3 md:text-base" disabled={isPageThreeBtnDisabled} onClick={() => pageThreeNextClick()}>Next</button>
+                <button className="token-btn-bg text-lg token-btn-color ml-2 px-16 py-2 rounded-lg font-semibold my-3 md:text-base disabled:grayscale" disabled={isPageThreeBtnDisabled} onClick={() => pageThreeNextClick()}>Next</button>
               </div>
             </>}
 

@@ -14,6 +14,7 @@ import walletLinkModule from "@web3-onboard/walletlink";
 import Web3 from 'web3';
 import { CHAINID, RPC, CHAINID_HEX } from '../config/abi-config';
 import { uiMetaData } from "../data";
+import { useRouter } from "next/router";
 
 const { wallet, tokenSymbol } = uiMetaData;
 
@@ -50,6 +51,7 @@ const onboard = Onboard({
 });
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
   const [account, setAccount] = useState();
   const [error, setError] = useState("");
   const [provider, setProvider] = useState();
@@ -114,6 +116,10 @@ function MyApp({ Component, pageProps }) {
       }
     }
   }
+
+  useEffect(() => {
+    if (!account) router.push('/')
+  }, [account])
 
   useEffect(() => {
     AOS.init({
