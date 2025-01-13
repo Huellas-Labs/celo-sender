@@ -3,21 +3,29 @@ import { uiMetaData } from "../../data";
 import { useState } from "react";
 import Web3 from "web3";
 import Link from "next/link";
+import toastr from 'toastr';
 
 const { name, siteName, title } = uiMetaData;
 
 const Referral = () => {
   const [value, setValue] = useState("");
   const [referalLink, setReferalLink] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
 
   const generateRef = () => {
     if (Web3.utils.isAddress(value)) {
-      setErrorMsg('');
       const refLink = `${value.toLowerCase()}`;
       setReferalLink(refLink);
+
+      navigator.clipboard
+        .writeText(refLink)
+        .then(() => {
+          toastr.info("Referral link copied to clipboard!");
+        })
+        .catch((err) => {
+          toastr.error("Failed to copy referral link:", err);
+        });
     } else {
-      setErrorMsg('Please enter a valid wallet Address');
+      toastr.error('Please enter a valid wallet Address');
     }
   };
   return (
@@ -49,9 +57,8 @@ const Referral = () => {
             className="bg-black text-white px-4 py-3 rounded-md my-2 md:w-[300px] placeholder-fb"
             onChange={(e) => setValue(e.target.value)}
           />
-          {errorMsg && <p className="text-red-700 font-bold mt-2 ml-1">{errorMsg}</p>}
         </> : <div>
-        <Link href={referalLink}><button className="bg-fb text-black font-semibold rounded-md py-2 px-4 my-3 flex gap-2 items-center" data-aos="fade-up">
+          <Link href={referalLink}><button className="bg-fb text-black font-semibold rounded-md py-2 px-4 my-3 flex gap-2 items-center" data-aos="fade-up">
             Share referral link <Image src="/images/send.png" alt="" width={18} height={18} />
           </button></Link>
         </div>}
